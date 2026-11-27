@@ -4,7 +4,7 @@ const bcrypt = require('bcryptjs');
 const fs = require('fs');
 const path = require('path');
 
-const DIR = path.join(__dirname, 'data');
+const DIR = process.env.VERCEL ? '/tmp/data' : path.join(__dirname, 'data');
 fs.mkdirSync(DIR, { recursive: true });
 const db = new DatabaseSync(path.join(DIR, 'school.db'));
 db.exec('PRAGMA journal_mode = WAL; PRAGMA foreign_keys = ON;');
